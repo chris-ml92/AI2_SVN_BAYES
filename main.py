@@ -48,6 +48,7 @@ linear_Scores = crossVal(linear_Classifier, X, Y, cv = 10, n_jobs = 12 ) # n of 
 
 print("Linear Kernel minimum score value is: " + str(linear_Scores.min()) + "\n")
 print("Linear Kernel maximum score value is: " + str(linear_Scores.max()) + "\n")
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (linear_Scores.mean(), linear_Scores.std()*2))
 
 print("======= END LINEAR KERNEL =======\n\n\n")
 
@@ -64,6 +65,7 @@ linear_Scores_ang = crossVal(linear_Classifier_ang, X_normalized, Y, cv = 10, n_
 
 print("ANGULAR Linear Kernel minimum score value is: " + str(linear_Scores_ang.min()) + "\n")
 print("ANGULAR Linear Kernel maximum score value is: " + str(linear_Scores_ang.max()) + "\n")
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (linear_Scores_ang.mean(), linear_Scores_ang.std()*2))
 
 print("======= END ANGULAR LINEAR KERNEL =======\n\n\n")
 
@@ -80,8 +82,7 @@ rbf_Scores = crossVal(rbf_Classifier, X, Y, cv = 10, n_jobs = 12)
 
 print("RBF Kernel minimum score value is: " + str(rbf_Scores.min()) + "\n")
 print("RBF Kernel maximum score value is: " + str(rbf_Scores.max()) + "\n")
-
-print("")
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (rbf_Scores.mean(), rbf_Scores.std()*2))
 
 print("======= END RBF KERNEL =======\n\n\n")
 
@@ -98,8 +99,7 @@ rbf_Scores_Ang = crossVal(rbf_Classifier, X_normalized, Y, cv = 10, n_jobs = 12)
 
 print("ANGULAR RBF Kernel minimum score value is: " + str(rbf_Scores_Ang.min()) + "\n")
 print("ANGULAR RBF Kernel maximum score value is: " + str(rbf_Scores_Ang.max()) + "\n")
-
-print("")
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (rbf_Scores_Ang.mean(), rbf_Scores_Ang.std()*2))
 
 print("======= ANGULAR END RBF KERNEL =======\n\n\n")
 
@@ -117,6 +117,7 @@ polynomial_Scores = crossVal(polynomial_Classifier, X, Y, cv=10, n_jobs = 12)
 
 print("Polynomial_d2 Kernel minimum score value is: " + str(polynomial_Scores.min()) + "\n")
 print("Polynomial_d2 Kernel maximum score value is: " + str(polynomial_Scores.max()) + "\n")
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (polynomial_Scores.mean(), polynomial_Scores.std()*2))
 
 print("======= END POLYNOMIAL KERNEL =======\n\n\n")
 
@@ -134,6 +135,7 @@ polynomial_Scores_Ang = crossVal(polynomial_Classifier, X_normalized, Y, cv=10, 
 
 print("ANGULAR Polynomial_d2 Kernel minimum score value is: " + str(polynomial_Scores_Ang.min()) + "\n")
 print("ANGULAR Polynomial_d2 Kernel maximum score value is: " + str(polynomial_Scores_Ang.max()) + "\n")
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (polynomial_Scores_Ang.mean(), polynomial_Scores_Ang.std()*2))
 
 print("======= ANGULAR END POLYNOMIAL KERNEL =======\n\n\n")
 
@@ -157,13 +159,22 @@ def model_test(modelType, train_x, train_y, test_x, test_y):
     predicted = model_fit.predict(test_x) #for debug
 
 
+print("Linear model score is: ")
+model_test(linear_Classifier,X_train,Y_train,X_test,Y_test)
+
 print("Angular linear model score is: ")
 model_test(linear_Classifier_ang,X_Norm_train,Y_Norm_train,X_Norm_test,Y_Norm_test)
 
 
+print("RBF Model score is: ")
+model_test(rbf_Classifier,X_train,Y_train,X_test,Y_test)
+
 print("Angular RBF Model score is: ")
 model_test(rbf_Classifier_Ang,X_Norm_train,Y_Norm_train,X_Norm_test,Y_Norm_test)
 
+
+print("Polynomial Model score is: ")
+model_test(polynomial_Classifier,X_train,Y_train,X_test,Y_test)
 
 print("Angular Polynomial Model score is: ")
 model_test(polynomial_Classifier_Ang,X_Norm_train,Y_Norm_train,X_Norm_test,Y_Norm_test)
