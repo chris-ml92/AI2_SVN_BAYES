@@ -24,7 +24,7 @@ def tf_idf(tf):
 
 dataSet = load_data(Train_set)
 
-X = dataSet[:,:54] # skipped last values as Torsello said
+X = dataSet[:,:54] # data
 Y = dataSet[:,57]  # spam/not spam array
 
 #-------------------------------------------------------------------------
@@ -34,9 +34,8 @@ X = tf_idf(X)
 
 
 #Dataset applying the cosine similarity
-listofNorms = np.sqrt(((X + 1e-128)**2).sum(axis = 1, keepdims = True)) #||d1|| = square root(d1[0]2 + d1[1]2 + ... + d1[n]2)
-X_normalized = np.where(listofNorms > 0.0, X / listofNorms, 0.0) # i kernel poi applicano in automatico la cosine similarity. che è (x1/||x1||)*(x2/||x2||)
-#Note that the tf-idf functionality in sklearn.feature_extraction.text can produce normalized vectors, in which case cosine_similarity is equivalent to linear_kernel, only slower.)
+listofNorms = np.sqrt(((X + 1e-128)**2).sum(axis = 1, keepdims = True))
+X_normalized = np.where(listofNorms > 0.0, X / listofNorms, 0.0)
 #-------------------------------------------------------------------------
 
 
@@ -46,12 +45,12 @@ X_normalized = np.where(listofNorms > 0.0, X / listofNorms, 0.0) # i kernel poi 
 print("======= LINEAR KERNEL =======\n")
 
 linear_Classifier = SVC(kernel = "linear")
-linear_Scores = crossVal(linear_Classifier, X, Y, cv = 10, n_jobs = 12 ) # n of cpu's used. io ho un i7 8700k, cambia in base al tuo setup in caso
+linear_Scores = crossVal(linear_Classifier, X, Y, cv = 10, n_jobs = 12 )
 MSE_linear = -1* crossVal(linear_Classifier, X, Y, cv = 10, n_jobs = 12, scoring='neg_mean_squared_error')
 print("Linear Kernel mean score value is: " + str(linear_Scores.mean())+"\n")
 print("Linear Kernel minimum score value is: " + str(linear_Scores.min()) + "\n")
 print("Linear Kernel maximum score value is: " + str(linear_Scores.max()) + "\n")
-print("Accuracy: %0.2f (+/- %0.3f)\n" % (linear_Scores.mean(), linear_Scores.std()*2))
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (linear_Scores.mean(), linear_Scores.std()))
 print("MSE value is: %0.4f\n" %(MSE_linear.mean()))
 
 print("======= END LINEAR KERNEL =======\n\n\n")
@@ -70,7 +69,7 @@ MSE_linear_ang = -1*crossVal(linear_Classifier_ang, X_normalized, Y, cv = 10, n_
 print("ANGULAR Linear Kernel mean score value is: " + str(linear_Scores_ang.mean())+"\n")
 print("ANGULAR Linear Kernel minimum score value is: " + str(linear_Scores_ang.min()) + "\n")
 print("ANGULAR Linear Kernel maximum score value is: " + str(linear_Scores_ang.max()) + "\n")
-print("Accuracy: %0.2f (+/- %0.3f)\n" % (linear_Scores_ang.mean(), linear_Scores_ang.std()*2))
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (linear_Scores_ang.mean(), linear_Scores_ang.std()))
 print("MSE value is: %0.4f\n" %(MSE_linear_ang.mean()))
 
 print("======= END ANGULAR LINEAR KERNEL =======\n\n\n")
@@ -88,7 +87,7 @@ MSE_rbf = -1* crossVal(rbf_Classifier, X, Y, cv = 10, n_jobs = 12, scoring='neg_
 print("RBF Kernel mean score value is: " + str(rbf_Scores.mean())+"\n")
 print("RBF Kernel minimum score value is: " + str(rbf_Scores.min()) + "\n")
 print("RBF Kernel maximum score value is: " + str(rbf_Scores.max()) + "\n")
-print("Accuracy: %0.2f (+/- %0.3f)\n" % (rbf_Scores.mean(), rbf_Scores.std()*2))
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (rbf_Scores.mean(), rbf_Scores.std()))
 print("MSE value is: %0.4f\n" %(MSE_rbf.mean()))
 
 print("======= END RBF KERNEL =======\n\n\n")
@@ -106,7 +105,7 @@ MSE_rbf_ang = -1*crossVal(rbf_Classifier_Ang, X_normalized, Y, cv = 10, n_jobs =
 print("ANGULAR RBF Kernel mean score value is: " + str(rbf_Scores_Ang.mean())+"\n")
 print("ANGULAR RBF Kernel minimum score value is: " + str(rbf_Scores_Ang.min()) + "\n")
 print("ANGULAR RBF Kernel maximum score value is: " + str(rbf_Scores_Ang.max()) + "\n")
-print("Accuracy: %0.2f (+/- %0.3f)\n" % (rbf_Scores_Ang.mean(), rbf_Scores_Ang.std()*2))
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (rbf_Scores_Ang.mean(), rbf_Scores_Ang.std()))
 print("MSE value is: %0.4f\n" %(MSE_rbf_ang.mean()))
 
 print("======= ANGULAR END RBF KERNEL =======\n\n\n")
@@ -125,7 +124,7 @@ MSE_poly = -1*crossVal(polynomial_Classifier, X, Y, cv = 10, n_jobs = 12, scorin
 print("Polynomial_d2 Kernel mean score value is: " + str(polynomial_Scores.mean())+"\n")
 print("Polynomial_d2 Kernel minimum score value is: " + str(polynomial_Scores.min()) + "\n")
 print("Polynomial_d2 Kernel maximum score value is: " + str(polynomial_Scores.max()) + "\n")
-print("Accuracy: %0.2f (+/- %0.3f)\n" % (polynomial_Scores.mean(), polynomial_Scores.std()*2))
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (polynomial_Scores.mean(), polynomial_Scores.std()))
 print("MSE value is: %0.4f\n" %(MSE_poly.mean()))
 
 print("======= END POLYNOMIAL KERNEL =======\n\n\n")
@@ -145,7 +144,7 @@ MSE_poly_ang = -1*crossVal(polynomial_Classifier_Ang, X_normalized, Y, cv = 10, 
 print("ANGULAR Polynomial_d2 Kernel mean score value is: " + str(polynomial_Scores_Ang.mean())+"\n")
 print("ANGULAR Polynomial_d2 Kernel minimum score value is: " + str(polynomial_Scores_Ang.min()) + "\n")
 print("ANGULAR Polynomial_d2 Kernel maximum score value is: " + str(polynomial_Scores_Ang.max()) + "\n")
-print("Accuracy: %0.2f (+/- %0.3f)\n" % (polynomial_Scores_Ang.mean(), polynomial_Scores_Ang.std()*2))
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (polynomial_Scores_Ang.mean(), polynomial_Scores_Ang.std()))
 print("MSE value is: %0.4f\n" %(MSE_poly_ang.mean()))
 
 print("======= ANGULAR END POLYNOMIAL KERNEL =======\n\n\n")

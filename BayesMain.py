@@ -22,7 +22,7 @@ def model_test(modelType, train_x, train_y, test_x, test_y):
 Train_set = "Data/spambase.data"
 dataSet = load_data(Train_set)
 
-X = dataSet[:,:54] # skipped last values as Torsello said
+X = dataSet[:,:54] #
 Y = dataSet[:,57]  # spam/not spam array
 X = X/100
 X_train, X_test, Y_train, Y_test = split_Trainingset(X,Y,test_size=0.25)
@@ -39,7 +39,7 @@ MSE_poly_ang = -1*crossVal(gaussian_Classifier, X, Y, cv = 10, n_jobs = 12, scor
 print("Guassian mean score value is: " + str(gaussian_Scores_Ang.mean())+"\n")
 print("Gaussian minimum score value is: " + str(gaussian_Scores_Ang.min()) + "\n")
 print("Gaussian maximum score value is: " + str(gaussian_Scores_Ang.max()) + "\n")
-print("Accuracy: %0.2f (+/- %0.3f)\n" % (gaussian_Scores_Ang.mean(), gaussian_Scores_Ang.std()*2))
+print("Accuracy: %0.2f (+/- %0.3f)\n" % (gaussian_Scores_Ang.mean(), gaussian_Scores_Ang.std()))
 print("MSE value is: %0.4f\n" %(MSE_poly_ang.mean()))
 print("Naive Bayes Model score is: ")
 model_test(gaussian_Classifier, X_train,Y_train,X_test,Y_test)
