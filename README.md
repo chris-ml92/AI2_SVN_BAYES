@@ -12,4 +12,4 @@ Can you transform the kernels to make use of angular information only (i.e., no 
 
 Classify the same data also through a Naive Bayes classifier for continuous inputs, modelling each feature with a Gaussian distribution.
 
-bayes Bayes
+bayes Bayes bayes
