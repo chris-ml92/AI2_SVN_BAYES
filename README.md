@@ -11,3 +11,5 @@ Perform SVM classification using linear, polynomial of degree 2, and RBF kernels
 Can you transform the kernels to make use of angular information only (i.e., no length)? Are they still positive definite kernels?
 
 Classify the same data also through a Naive Bayes classifier for continuous inputs, modelling each feature with a Gaussian distribution.
+
+bayes Bayes
